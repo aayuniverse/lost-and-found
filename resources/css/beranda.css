@@ -1,0 +1,618 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --navy: #102c59;
+    --blue: #0874c9;
+    --blue-dark: #07559b;
+    --yellow: #ffdf35;
+    --text: #111827;
+    --white: #ffffff;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text);
+    background: #e9e8f1;
+    line-height: 1.5;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.navbar {
+    min-height: 110px;
+    padding: 15px 3%;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(110deg, #203d94, #0d2c59);
+    border-bottom: 3px solid #2865a2;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+}
+
+.brand img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+
+.brand-text strong {
+    font-size: 23px;
+    letter-spacing: 2px;
+    line-height: 0.95;
+}
+
+.brand-text small {
+    margin-top: 6px;
+    color: var(--yellow);
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+/* Hero */
+.hero {
+    padding: 48px 6% 65px;
+    color: white;
+    background: linear-gradient(120deg, #267bb4, #0875c9 65%, #07549b);
+}
+
+.hero-content {
+    min-height: 475px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    align-items: center;
+    gap: 35px;
+}
+
+.hero-copy h1 {
+    margin-bottom: 28px;
+    font-size: clamp(32px, 4.8vw, 49px);
+    line-height: 1.2;
+    font-weight: 800;
+    text-shadow: 0 3px 3px #0003;
+}
+
+.hero-copy p {
+    max-width: 570px;
+    margin-bottom: 48px;
+    font-size: 17px;
+    line-height: 1.35;
+    text-align: justify;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.btn-masuk {
+    min-width: 220px;
+    padding: 9px 28px;
+    border: 3px solid #d7e8ff;
+    border-radius: 24px;
+    background: #69a9e4;
+    color: #101820;
+    font-size: 30px;
+}
+
+.btn-masuk:hover {
+    background: white;
+}
+
+.hero-logo {
+    width: min(100%, 390px);
+    min-height: 300px;
+    margin: auto;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    border: 2px solid #d7e8ff;
+    border-radius: 50%;
+    background: #ffffff25;
+}
+
+.hero-logo img {
+    width: 100%;
+    max-width: 320px;
+    max-height: 190px;
+    object-fit: contain;
+}
+
+.logo-fallback {
+    display: none;
+    flex-direction: column;
+    color: white;
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: 2px;
+}
+
+.logo-fallback small {
+    margin-top: 10px;
+    color: var(--yellow);
+    font-size: 12px;
+    letter-spacing: 0;
+}
+
+.hero-logo:not(:has(img:not([style*="display: none"]))) .logo-fallback {
+    display: flex;
+}
+
+/* Pengenalan */
+.intro {
+    position: relative;
+    min-height: 500px;
+    padding: 48px 6% 0;
+    overflow: hidden;
+    background: linear-gradient(130deg, #8298d9, #536fb4);
+    color: white;
+}
+
+.intro-background {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(#7187c955, #344c8c55),
+        url("../images/lost-found-bg.png");
+    background-size: cover;
+    background-position: center;
+    opacity: 0.75;
+}
+
+.intro-content {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 25px;
+}
+
+.intro-copy h2 {
+    margin-bottom: 22px;
+    font-size: clamp(25px, 3vw, 34px);
+}
+
+.intro-copy p {
+    max-width: 560px;
+    font-size: 14px;
+}
+
+.video-placeholder {
+    width: min(100%, 390px);
+    aspect-ratio: 16 / 9;
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: #050505;
+}
+
+.play-icon {
+    width: 70px;
+    height: 70px;
+    display: grid;
+    place-items: center;
+    border: 3px solid #777;
+    border-radius: 50%;
+    color: white;
+    font-size: 30px;
+}
+
+.video-placeholder small {
+    color: #ddd;
+    font-size: 11px;
+}
+
+.intro-visual {
+    min-height: 250px;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+}
+
+.intro-visual img {
+    width: 100%;
+    max-height: 360px;
+    object-fit: contain;
+    object-position: bottom;
+}
+
+.search-promo {
+    position: relative;
+    z-index: 2;
+    min-height: 150px;
+    margin: -5px -6% 0 42%;
+    padding: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: #a7c9f1;
+    color: #10233c;
+}
+
+.search-promo h3 {
+    margin-bottom: 10px;
+    font-size: 23px;
+}
+
+.search-promo p {
+    max-width: 400px;
+    font-size: 14px;
+}
+
+.btn-cari {
+    flex-shrink: 0;
+    padding: 11px 22px;
+    border-radius: 20px;
+    background: #0644bb;
+    color: white;
+}
+
+.btn-cari:hover {
+    background: #082f7e;
+}
+
+/* Barang terbaru */
+.latest {
+    padding: 12px 28px 42px;
+    background: #e9e8f1;
+}
+
+.latest-heading {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.latest-heading h2 {
+    font-size: 25px;
+}
+
+.arrow-link {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border: 2px solid #444;
+    border-radius: 50%;
+    font-size: 27px;
+}
+
+.item-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.item-card {
+    min-width: 0;
+    min-height: 115px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #c9c9d2;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 2px 5px #0002;
+}
+
+.item-image {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #eaf1f9;
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.item-emoji {
+    position: absolute;
+    font-size: 35px;
+}
+
+.item-image img:not([style*="display: none"]) + .item-emoji {
+    display: none;
+}
+
+.item-info {
+    position: relative;
+    min-width: 0;
+    min-height: 85px;
+    flex: 1;
+    padding-bottom: 25px;
+}
+
+.item-info h3 {
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+.item-info p {
+    font-size: 9px;
+    line-height: 1.3;
+}
+
+.item-info small {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 8px;
+}
+
+.detail-link {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 5px 8px;
+    border-radius: 6px;
+    background: #203d94;
+    color: white;
+    font-size: 8px;
+    font-weight: bold;
+}/* Barang terbaru */
+.latest {
+    padding: 12px 28px 42px;
+    background: #e9e8f1;
+}
+
+.latest-heading {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.latest-heading h2 {
+    font-size: 25px;
+}
+
+.arrow-link {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border: 2px solid #444;
+    border-radius: 50%;
+    font-size: 27px;
+}
+
+.item-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.item-card {
+    min-width: 0;
+    min-height: 115px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #c9c9d2;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 2px 5px #0002;
+}
+
+.item-image {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #eaf1f9;
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.item-emoji {
+    position: absolute;
+    font-size: 35px;
+}
+
+.item-image img:not([style*="display: none"]) + .item-emoji {
+    display: none;
+}
+
+.item-info {
+    position: relative;
+    min-width: 0;
+    min-height: 85px;
+    flex: 1;
+    padding-bottom: 25px;
+}
+
+.item-info h3 {
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+.item-info p {
+    font-size: 9px;
+    line-height: 1.3;
+}
+
+.item-info small {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 8px;
+}
+
+.detail-link {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 5px 8px;
+    border-radius: 6px;
+    background: #203d94;
+    color: white;
+    font-size: 8px;
+    font-weight: bold;
+}
+
+.footer {
+    min-height: 100px;
+    padding: 35px 20px;
+    background: linear-gradient(110deg, #203d94, #0d2c59);
+    color: white;
+    text-align: center;
+    font-size: 13px;
+}
+
+/* Responsif */
+@media (max-width: 760px) {
+    .navbar {
+        min-height: 85px;
+    }
+
+    .brand img {
+        width: 55px;
+        height: 55px;
+    }
+
+    .brand-text strong {
+        font-size: 19px;
+    }
+
+    .hero {
+        padding: 40px 6%;
+    }
+
+    .hero-content {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .hero-copy h1 {
+        font-size: 36px;
+    }
+
+    .hero-copy p {
+        margin-bottom: 28px;
+    }
+
+    .hero-logo {
+        width: min(100%, 320px);
+        min-height: 230px;
+    }
+
+    .intro-content {
+        grid-template-columns: 1fr;
+    }
+
+    .intro-visual {
+        min-height: 120px;
+    }
+
+    .search-promo {
+        margin: 20px -6% 0;
+    }
+
+    .item-list {
+        grid-template-columns: 1fr;
+    }
+
+    .item-card {
+        min-height: 120px;
+    }
+}
+
+@media (max-width: 420px) {
+    .hero-copy h1 {
+        font-size: 30px;
+    }
+
+    .btn-masuk {
+        min-width: 180px;
+        font-size: 25px;
+    }
+
+    .search-promo {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .latest {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+}
+
+/* Memperbaiki posisi teks dan foto mahasiswa */
+.about-content,
+.tentang-content,
+.section-about-content {
+    align-items: center;
+    gap: 40px;
+}
+
+.about-content img,
+.tentang-content img,
+.section-about-content img {
+    position: relative;
+    z-index: 1;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.about-content h2,
+.tentang-content h2,
+.section-about-content h2 {
+    position: relative;
+    z-index: 2;
+    overflow-wrap: normal;
+    word-break: normal;
+}
