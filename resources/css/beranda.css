@@ -616,3 +616,150 @@ a {
     overflow-wrap: normal;
     word-break: normal;
 }
+
+
+
+/* FIX FINAL: KARTU BARANG TERBARU */
+
+.latest .item-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 20px;
+}
+
+.latest .item-grid .item-card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    padding: 20px;
+    gap: 12px;
+    overflow: hidden;
+}
+
+/* Gambar selalu di atas dan ukurannya konsisten */
+.latest .item-grid .item-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 160px;
+    min-height: 160px;
+    flex: none;
+    padding: 12px;
+    box-sizing: border-box;
+    border-radius: 16px;
+    background: #eef5ff;
+    overflow: hidden;
+}
+
+.latest .item-grid .item-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Nama barang tidak boleh terpotong per suku kata */
+.latest .item-grid .item-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: static;
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    flex: 1;
+    padding: 0;
+    gap: 8px;
+}
+
+.latest .item-grid .item-info h3 {
+    display: block;
+    width: 100%;
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.45;
+    font-weight: 700;
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: none;
+}
+
+.latest .item-grid .item-category {
+    display: inline-block;
+    width: auto;
+    max-width: 100%;
+    margin: 0;
+    white-space: normal;
+}
+
+.latest .item-grid .item-info p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.latest .item-grid .item-info small {
+    display: block;
+    position: static;
+    margin-top: 2px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* Tombol berada di bawah informasi barang */
+.latest .item-grid .btn-detail {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+    position: static;
+    width: auto;
+    max-width: 100%;
+    min-height: 40px;
+    margin: 4px 0 0;
+    padding: 10px 16px;
+    box-sizing: border-box;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+/* Tablet */
+@media (max-width: 1000px) {
+    .latest .item-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .latest .item-grid .item-image {
+        height: 150px;
+        min-height: 150px;
+    }
+}
+
+/* HP */
+@media (max-width: 520px) {
+    .latest .item-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .latest .item-grid .item-card {
+        padding: 16px;
+    }
+
+    .latest .item-grid .item-image {
+        height: 180px;
+        min-height: 180px;
+    }
+
+    .latest .item-grid .item-info h3 {
+        font-size: 17px;
+    }
+}

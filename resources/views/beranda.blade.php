@@ -24,42 +24,39 @@
 </header>
 
 <main>
-    <section class="hero">
-        <div class="hero-decoration circle-one"></div>
-        <div class="hero-decoration circle-two"></div>
+    
+<section class="hero">
+    <div class="hero-decoration circle-one"></div>
+    <div class="hero-decoration circle-two"></div>
 
-        <div class="hero-inner">
-            <div class="hero-copy">
-                <span class="eyebrow">CAMPUS LOST & FOUND PLATFORM</span>
+    <div class="hero-inner">
+        <div class="hero-copy">
+            <span class="eyebrow">CAMPUS LOST &amp; FOUND PLATFORM</span>
 
-                <h1>
-                    Kehilangan barang<br>
-                    di kampus?<br>
-                    Temukan kembali<br>
-                    di <span>TEMUBARANG</span>
-                </h1>
+            <h1>
+                Kehilangan barang<br>
+                di kampus?<br>
+                Temukan kembali<br>
+                di <span>TEMUBARANG</span>
+            </h1>
 
-                <p>
-                    Platform campus lost &amp; found yang membantu mahasiswa
-                    melaporkan barang hilang dan menemukan kembali barang
-                    yang ditemukan di lingkungan kampus dengan lebih mudah
-                    dan cepat.
-                </p>
+            <p>
+                Platform campus lost &amp; found yang membantu mahasiswa
+                melaporkan barang hilang dan menemukan kembali barang
+                yang ditemukan di lingkungan kampus dengan lebih mudah
+                dan cepat.
+            </p>
 
-                <a href="{{ url('/login') }}" class="btn btn-masuk">
-                    Masuk <span aria-hidden="true"> </span>
-                </a>
-            </div>
-
-            <div class="hero-visual">
-                <div class="hero-campus"></div>
-
-            
-                    </div>
-                </div>
-            </div>
+            <a href="{{ route('login') }}" class="btn btn-masuk">
+                Masuk
+            </a>
         </div>
-    </section>
+
+        <div class="hero-visual">
+            <div class="hero-campus"></div>
+        </div>
+    </div>
+</section>
 
     <section class="about">
         <div class="about-inner">
@@ -99,7 +96,7 @@
                     </p>
                 </div>
 
-                <a href="#barang-terbaru" class="btn btn-cari">
+                <a href="{{ route('login') }}" class="btn btn-cari">
                     Cari Barang <span aria-hidden="true">→</span>
                 </a>
             </div>
