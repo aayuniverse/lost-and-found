@@ -63,7 +63,7 @@ Route::middleware('auth')->group(function () {
     })->name('barang.cari');
 
     Route::get('/barang-hilang', function () {
-        return 'Halaman Barang Hilang akan dibuat berikutnya.';
+    return view('barang-hilang');
     })->name('barang.hilang');
 
     Route::get('/barang-ditemukan', function () {
