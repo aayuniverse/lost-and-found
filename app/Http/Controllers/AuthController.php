@@ -82,7 +82,7 @@ $status = \Illuminate\Support\Facades\Password::sendResetLink(
     $request->only('email')
 );
 
-    return $status === Password::RESET_LINK_SENT
+     return $status === \Illuminate\Support\Facades\Password::RESET_LINK_SENT
         ? back()->with('success', 'Tautan reset password berhasil dikirim ke email.')
         : back()->withErrors(['email' => __($status)]);
 }
@@ -116,9 +116,11 @@ public function resetPassword(Request $request)
         }
     );
 
-    return $status === Password::PASSWORD_RESET
+   
+    return $status === \Illuminate\Support\Facades\Password::PASSWORD_RESET
         ? redirect()->route('login')->with('success', 'Password berhasil diubah. Silakan login.')
         : back()->withErrors(['email' => __($status)]);
+
     }
 
     public function logout(Request $request)
