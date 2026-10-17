@@ -432,87 +432,41 @@
 
                 <div class="items-grid" id="itemsGrid">
 
-                    <article class="item-card">
-                        <img
-                            class="item-image"
-                            src="{{ asset('images/barang-iphone.png') }}"
-                            alt="iPhone"
-                        >
+    @forelse ($laporan as $item)
+        <article class="item-card">
+            @php
+                $foto = $item->foto->first();
+            @endphp
 
-                        <div class="item-info">
-                            <h2>iPhone</h2>
-                            <p class="item-location">
-                                di belakang wc, menuju ruang 6
-                            </p>
+            <img
+                class="item-image"
+                src="{{ $foto ? asset('storage/' . $foto->url_foto) : asset('images/logo-temubarang.png') }}"
+                alt="{{ $item->nama_barang }}"
+            >
 
-                            <div class="item-bottom">
-                                <span class="item-date">3 Maret 2026</span>
-                                <a href="#" class="detail-button">Lihat Detail</a>
-                            </div>
-                        </div>
-                    </article>
+            <div class="item-info">
+                <h2>{{ $item->nama_barang }}</h2>
 
-                    <article class="item-card">
-                        <img
-                            class="item-image"
-                            src="{{ asset('images/dompet.png') }}"
-                            alt="Dompet"
-                        >
+                <p class="item-location">
+                    {{ $item->lokasi_kejadian ?? 'Lokasi belum dicantumkan' }}
+                </p>
 
-                        <div class="item-info">
-                            <h2>Dompet</h2>
-                            <p class="item-location">
-                                di belakang wc, menuju ruang 6
-                            </p>
+                <div class="item-bottom">
+                    <span class="item-date">
+                        {{ \Carbon\Carbon::parse($item->tanggal_kejadian)->translatedFormat('j F Y') }}
+                    </span>
 
-                            <div class="item-bottom">
-                                <span class="item-date">3 Maret 2026</span>
-                                <a href="#" class="detail-button">Lihat Detail</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="item-card">
-                        <img
-                            class="item-image"
-                            src="{{ asset('images/kunci-motor.png') }}"
-                            alt="Kunci motor"
-                        >
-
-                        <div class="item-info">
-                            <h2>Kunci Motor</h2>
-                            <p class="item-location">
-                                di belakang wc, menuju ruang 6
-                            </p>
-
-                            <div class="item-bottom">
-                                <span class="item-date">3 Maret 2026</span>
-                                <a href="#" class="detail-button">Lihat Detail</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="item-card">
-                        <img
-                            class="item-image"
-                            src="{{ asset('images/barang-earphone.png') }}"
-                            alt="Earphone"
-                        >
-
-                        <div class="item-info">
-                            <h2>Earphone</h2>
-                            <p class="item-location">
-                                di belakang wc, menuju ruang 6
-                            </p>
-
-                            <div class="item-bottom">
-                                <span class="item-date">3 Maret 2026</span>
-                                <a href="#" class="detail-button">Lihat Detail</a>
-                            </div>
-                        </div>
-                    </article>
-
+                    <a href="#" class="detail-button">Lihat Detail</a>
                 </div>
+            </div>
+        </article>
+    @empty
+        <p style="grid-column:1/-1; text-align:center; padding:35px; background:white; border-radius:10px;">
+            Belum ada laporan barang hilang yang dipublikasikan.
+        </p>
+    @endforelse
+
+</div>
             </section>
 
             <aside class="tips">
@@ -570,11 +524,12 @@
 <div id="modalKeluar" style="display:none;position:fixed;inset:0;background:#0006;z-index:9999;align-items:center;justify-content:center">
 <div style="background:white;padding:45px 25px;border-radius:15px;text-align:center;width:min(780px,90%)">
 <h2 style="font-size:30px;font-weight:400;margin-bottom:35px">Apakah anda yakin untuk Keluar<br>ke Beranda?</h2>
-<form action="{{ route('logout') }}" method="POST">
+<form action="{{ route('dashboard') }}" method="GET">
 @csrf
 <button type="submit" style="background:#0645bd;color:white;padding:12px 45px;border:0;border-radius:15px;font-size:28px;font-weight:bold;cursor:pointer">YA</button>
 <button type="button" onclick="document.getElementById('modalKeluar').style.display='none'" style="background:#c00;color:white;padding:12px 28px;margin-left:25px;border:0;border-radius:15px;font-size:28px;font-weight:bold;cursor:pointer">TIDAK</button>
 </form></div></div>
 </body>
 </html>
+
 

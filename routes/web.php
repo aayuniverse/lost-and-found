@@ -3,12 +3,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LaporanController;
+use App\Models\Laporan;
 
 /*
 |--------------------------------------------------------------------------
 | Beranda publik
 |--------------------------------------------------------------------------
-| Pengunjung bisa membuka halaman ini tanpa login.
 */
 Route::get('/', function () {
     return view('beranda');
@@ -16,7 +17,7 @@ Route::get('/', function () {
 
 /*
 |--------------------------------------------------------------------------
-| Login dan Register
+| Login, Register, dan Reset Password
 |--------------------------------------------------------------------------
 */
 Route::middleware('guest')->group(function () {
@@ -31,8 +32,9 @@ Route::middleware('guest')->group(function () {
 
     Route::post('/register', [AuthController::class, 'register'])
         ->name('register.process');
+
     Route::get('/forgot-password', [AuthController::class, 'showForgotPassword'])
-    ->name('password.request');
+        ->name('password.request');
 
     Route::post('/forgot-password', [AuthController::class, 'sendResetLink'])
         ->name('password.email');
@@ -50,31 +52,98 @@ Route::middleware('guest')->group(function () {
 |--------------------------------------------------------------------------
 */
 Route::middleware('auth')->group(function () {
+
+    // Dashboard
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
 
+    // Beranda setelah login
     Route::get('/beranda', function () {
         return redirect()->route('dashboard');
     })->name('beranda');
 
+    // Cari barang
     Route::get('/cari-barang', function () {
         return 'Halaman Cari Barang akan dibuat berikutnya.';
     })->name('barang.cari');
 
+    /*
+    |--------------------------------------------------------------------------
+    | Daftar Barang Hilang
+    |--------------------------------------------------------------------------
+    */
     Route::get('/barang-hilang', function () {
-    return view('barang-hilang');
+        $laporan = Laporan::with('foto')
+            ->where('jenis_laporan', 'Hilang')
+            ->latest()
+            ->get();
+
+        return view('barang-hilang', compact('laporan'));
     })->name('barang.hilang');
 
+    /*
+    |--------------------------------------------------------------------------
+    | Daftar Barang Ditemukan
+    |--------------------------------------------------------------------------
+    */
     Route::get('/barang-ditemukan', function () {
-        return 'Halaman Barang Ditemukan akan dibuat berikutnya.';
+    $laporan = \App\Models\Laporan::with('foto')
+        ->where('jenis_laporan', 'Ditemukan')
+        ->latest()
+        ->get();
+
+    return view('barang-ditemukan', compact('laporan'));
     })->name('barang.ditemukan');
 
+    /*
+    |--------------------------------------------------------------------------
+    | Pilihan Jenis Laporan
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/pilih-laporan', function () {
+        return view('pilih-laporan');
+    })->name('laporkan.pilih');
+
     Route::get('/laporkan-barang', function () {
-        return 'Halaman Laporan Barang akan dibuat berikutnya.';
+        return redirect()->route('laporkan.pilih');
     })->name('barang.laporkan');
 
-    Route::post('/logout', [AuthController::class, 'logout'])
-        ->name('logout');
-});
+    /*
+    |--------------------------------------------------------------------------
+    | Form dan Penyimpanan Laporan Barang Hilang
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/laporkan-barang-hilang', function () {
+        return view('laporkan-hilang');
+    })->name('laporkan.hilang');
 
+    Route::post('/laporkan-barang-hilang', [
+        LaporanController::class,
+        'simpanHilang',
+    ])->name('laporkan.hilang.simpan');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Form dan Penyimpanan Laporan Barang Ditemukan
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/laporkan-barang-ditemukan', function () {
+        return view('laporkan-ditemukan');
+    })->name('laporkan.ditemukan');
+
+    Route::post('/laporkan-barang-ditemukan', [
+        LaporanController::class,
+        'simpanDitemukan',
+    ])->name('laporkan.ditemukan.simpan');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Logout
+    |--------------------------------------------------------------------------
+    */
+    Route::post('/logout', [
+        AuthController::class,
+        'logout',
+    ])->name('logout');
+});

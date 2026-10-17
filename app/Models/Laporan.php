@@ -13,14 +13,18 @@ class Laporan extends Model
     protected $primaryKey = 'id_laporan';
 
     protected $fillable = [
-        'id_user',
-        'jenis_laporan',
-        'nama_barang',
-        'deskripsi',
-        'tanggal_kejadian',
-        'status',
-        'alasan_penolakan',
-        'kontak',
+    'id_user',
+    'jenis_laporan',
+    'nama_barang',
+    'warna_barang',
+    'nama_pelapor',
+    'kontak',
+    'lokasi_kejadian',
+    'tanggal_kejadian',
+    'waktu_kejadian',
+    'deskripsi',
+    'status',
+    'alasan_penolakan',
     ];
 
     protected function casts(): array
