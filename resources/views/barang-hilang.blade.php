@@ -422,27 +422,33 @@
                 <div class="content-heading">
                     <h1>Barang Hilang</h1>
 
+                   @if ($laporan->lastPage() > 1)
                     <nav class="pagination" aria-label="Navigasi halaman">
-                        <button type="button" class="page-number active" data-page="1">1</button>
-                        <button type="button" class="page-number" data-page="2">2</button>
-                        <button type="button" class="page-number" data-page="3">3</button>
-                        <button type="button" class="page-number" data-page="4">4</button>
+                        @for ($page = 1; $page <= $laporan->lastPage(); $page++)
+                            <a
+                                href="{{ $laporan->url($page) }}"
+                                class="page-number {{ $laporan->currentPage() == $page ? 'active' : '' }}"
+                            >
+                                {{ $page }}
+                            </a>
+                        @endfor
                     </nav>
+                        @endif
                 </div>
 
                 <div class="items-grid" id="itemsGrid">
 
     @forelse ($laporan as $item)
-        <article class="item-card">
-            @php
-                $foto = $item->foto->first();
-            @endphp
+    <article class="item-card">
+        @php
+            $foto = $item->foto->first();
+        @endphp
 
-            <img
-                class="item-image"
-                src="{{ $foto ? asset('storage/' . $foto->url_foto) : asset('images/logo-temubarang.png') }}"
-                alt="{{ $item->nama_barang }}"
-            >
+        <img
+            class="item-image"
+            src="{{ $foto ? asset('storage/' . $foto->url_foto) : asset('images/logo-temubarang.png') }}"
+            alt="{{ $item->nama_barang }}"
+        >
 
             <div class="item-info">
                 <h2>{{ $item->nama_barang }}</h2>
@@ -489,7 +495,7 @@
                         dari kelas, perpustakaan, atau kantin.
                     </li>
 
-                    <li>
+                    <li>img
                         Gunakan tas dengan resleting atau pengaman.
                         Tas yang tertutup dapat membantu mencegah barang
                         jatuh atau tertinggal.

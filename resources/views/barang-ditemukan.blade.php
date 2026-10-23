@@ -513,10 +513,18 @@
                 <div class="content-heading">
                     <h1>Barang Ditemukan</h1>
 
-                    <nav class="pagination" aria-label="Navigasi halaman">
-                        <button type="button" class="page-number active" data-page="1" aria-label="Halaman 1">1</button>
-                        <button type="button" class="page-number" data-page="2" aria-label="Halaman 2">2</button>
-                    </nav>
+                    <@if ($laporan->lastPage() > 1)
+                        <nav class="pagination" aria-label="Navigasi halaman">
+                            @for ($page = 1; $page <= $laporan->lastPage(); $page++)
+                                <a
+                                    href="{{ $laporan->url($page) }}"
+                                    class="page-number {{ $laporan->currentPage() == $page ? 'active' : '' }}"
+                                >
+                                    {{ $page }}
+                                </a>
+                            @endfor
+                        </nav>
+                    @endif
                 </div>
 
                 

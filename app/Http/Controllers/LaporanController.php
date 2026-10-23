@@ -96,4 +96,39 @@ class LaporanController extends Controller
                 ->withInput();
         }
     }
+    public function setujui($id)
+{
+    $laporan = Laporan::findOrFail($id);
+
+    if ($laporan->status !== 'Menunggu Verifikasi') {
+        return back()->with('error', 'Laporan ini sudah diverifikasi.');
+    }
+
+    $laporan->update([
+        'status' => 'Dipublikasikan',
+        'alasan_penolakan' => null,
+    ]);
+
+    return back()->with('success', 'Laporan berhasil disetujui.');
+}
+
+public function tolak(Request $request, $id)
+{
+    $validated = $request->validate([
+        'alasan_penolakan' => 'required|string|max:1000',
+    ]);
+
+    $laporan = Laporan::findOrFail($id);
+
+    if ($laporan->status !== 'Menunggu Verifikasi') {
+        return back()->with('error', 'Laporan ini sudah diverifikasi.');
+    }
+
+    $laporan->update([
+        'status' => 'Ditolak',
+        'alasan_penolakan' => $validated['alasan_penolakan'],
+    ]);
+
+    return back()->with('success', 'Laporan berhasil ditolak.');
+}
 }

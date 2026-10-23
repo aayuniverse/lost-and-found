@@ -63,38 +63,37 @@ Route::middleware('auth')->group(function () {
         return redirect()->route('dashboard');
     })->name('beranda');
 
-    // Cari barang
-    Route::get('/cari-barang', function () {
-        return 'Halaman Cari Barang akan dibuat berikutnya.';
-    })->name('barang.cari');
+  
+/*
+/*
+|--------------------------------------------------------------------------
+| Daftar Barang Hilang
+|--------------------------------------------------------------------------
+*/
+Route::get('/barang-hilang', function () {
+    $laporan = Laporan::with('foto')
+        ->where('jenis_laporan', 'Hilang')
+        ->where('status', 'Dipublikasikan')
+        ->latest()
+        ->paginate(4);
 
-    /*
-    |--------------------------------------------------------------------------
-    | Daftar Barang Hilang
-    |--------------------------------------------------------------------------
-    */
-    Route::get('/barang-hilang', function () {
-        $laporan = Laporan::with('foto')
-            ->where('jenis_laporan', 'Hilang')
-            ->latest()
-            ->get();
+    return view('barang-hilang', compact('laporan'));
+})->name('barang.hilang');
 
-        return view('barang-hilang', compact('laporan'));
-    })->name('barang.hilang');
-
-    /*
-    |--------------------------------------------------------------------------
-    | Daftar Barang Ditemukan
-    |--------------------------------------------------------------------------
-    */
-    Route::get('/barang-ditemukan', function () {
+/*
+|--------------------------------------------------------------------------
+| Daftar Barang Ditemukan
+|--------------------------------------------------------------------------
+*/
+Route::get('/barang-ditemukan', function () {
     $laporan = \App\Models\Laporan::with('foto')
         ->where('jenis_laporan', 'Ditemukan')
+        ->where('status', 'Dipublikasikan')
         ->latest()
-        ->get();
+        ->paginate(4);
 
     return view('barang-ditemukan', compact('laporan'));
-    })->name('barang.ditemukan');
+})->name('barang.ditemukan');
 
     /*
     |--------------------------------------------------------------------------
@@ -136,6 +135,23 @@ Route::middleware('auth')->group(function () {
         LaporanController::class,
         'simpanDitemukan',
     ])->name('laporkan.ditemukan.simpan');
+
+    /*
+|--------------------------------------------------------------------------
+| Verifikasi Laporan oleh TU
+|--------------------------------------------------------------------------
+*/
+Route::middleware('role.tu')->group(function () {
+    Route::patch('/tu/laporan/{id}/setujui', [
+        LaporanController::class,
+        'setujui',
+    ])->name('tu.laporan.setujui');
+
+    Route::patch('/tu/laporan/{id}/tolak', [
+        LaporanController::class,
+        'tolak',
+    ])->name('tu.laporan.tolak');
+});
 
     /*
     |--------------------------------------------------------------------------

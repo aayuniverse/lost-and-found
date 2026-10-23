@@ -125,7 +125,7 @@
                 <button type="submit" class="submit-button">Kirim Tautan Reset</button>
             </form>
 
-            <a href="{{ route('login') }}" class="back-link">← Kembali ke Login</a>
+            <a href="{{ route('login') }}" class="back-link">Kembali ke Login</a>
         </section>
     </main>
 </body>

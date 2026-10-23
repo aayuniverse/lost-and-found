@@ -376,7 +376,7 @@ body::before {
                 @csrf
 
                 <div class="form-group">
-                    <label for="nim_nip">NIM</label>
+                    <label for="nim_nip">NIM/NIP</label>
                     <div class="input-group">
                         <span class="input-icon">
                             <img
@@ -392,7 +392,7 @@ body::before {
                             id="nim_nip"
                             type="text"
                             name="nim_nip"
-                            placeholder="Masukkan NIM"
+                            placeholder="Masukkan User ID (NIM / NIP)"
                             value="{{ old('nim_nip') }}"
                             autocomplete="username"
                             required

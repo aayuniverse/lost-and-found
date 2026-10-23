@@ -209,6 +209,31 @@ img {
 }
 
 
+.hero-logo img {
+    width: 76px;
+    height: 76px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.hero-logo strong {
+    display: block;
+    color: white;
+    font-size: 22px;
+    line-height: 1.04;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.hero-logo span {
+    display: block;
+    margin-top: 6px;
+    color: #ffe94f;
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
 /* ABOUT */
 
 .about {
@@ -715,4 +740,32 @@ img {
         scroll-behavior: auto !important;
         transition: none !important;
     }
+}
+
+/* Pagination daftar barang */
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pagination .page-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid #c9c9d2;
+    border-radius: 10px;
+    background: white;
+    color: #222;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.pagination .page-number.active {
+    background: #2945ad;
+    color: white;
+    border-color: #2945ad;
 }
